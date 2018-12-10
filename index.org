@@ -1,0 +1,126 @@
+#+Title: Wut is Elixir?
+#+Author: @Cuwano
+#+Email:SexyACM@BestAsocEUW.io
+
+#+LANGUAGE: es
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 24.5.1 (Org mode 8.3.2)
+#+LATEX_CLASS_OPTIONS: [a4paper,hidelinks]
+
+#+LATEX_CLASS_OPTIONS: [...,hidelinks]
+
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:t reveal_control:t
+#+OPTIONS: reveal_rolling_links:nil reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_slide_number:h/v
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: timestamp:nil
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: linear
+#+REVEAL_THEME: blood
+#+REVEAL_HLEVEL: 1
+#+REVEAL_EXTRA_CSS: ./acm.css
+#+REVEAL_HEAD_PREAMBLE: <meta name="description" content="EmacsFTW.">
+#+REVEAL_PLUGINS: (markdown notes zoom multiplex classList highlight)
+
+
+#+OPTIONS: toc:nil
+# #+OPTIONS: reveal_single_file:t
+
+* Basic Elixir
+** Pattern matching
+#+BEGIN_SRC elixir
+{a, b} = {1, 2}
+#+END_SRC
+
+** Module definition and functions
+#+BEGIN_SRC elixir
+  # le_test.ex
+  defmodule LeTest do
+    def sum(a, b) do
+      a + b
+    end
+
+    def sum({a, b}) do
+      a + b
+    end
+  end
+#+END_SRC
+
+** Module definition and functions
+#+BEGIN_SRC elixir
+  # le_test.ex
+  defmodule LeTest do
+    # Arity 2
+    def sum(a, b), do: a + b
+
+    # Arity 1
+    def sum({a, b}), do: a + b
+    def sum(a), do: a + 1
+    def sum(_), do: 0
+  end
+#+END_SRC
+
+** Module definition and functions
+#+BEGIN_SRC elixir
+  LeTest.sum(1, 2)
+  # 3
+
+  LeTest.sum(1)
+  # 2
+
+  LeTest.sum({2, 2})
+  # 4
+#+END_SRC
+
+** Anonymous functions
+#+BEGIN_SRC elixir
+  sum = fn a, b -> a + b end
+
+  sum.(1, 2)
+  # 3
+
+  sum = & &1 + &2
+
+  sum.(2, 2)
+  # 4
+#+END_SRC
+
+* Processes
+** Create processes
+~spawn~
+
+** Send messages
+~send~
+
+** Receive messages
+~receive~
+
+** Maintain a state
+Create ~loop~ function
+
+** Link a process
+Handle errors
+"Let it crash"
+
+* GenServer
+** Create GenServers
+Define GenServer module
+~start_link~
+
+** Send messages
+~call~, ~cast~, ~send~
+
+** Receive messages
+~handle_call~, ~handle_cast~, ~handle_info~
+
+** Maintain a state
+** Link a GenServer
+Handle errors
+
+** Agents
+Another implementation of GenServer
+
+* Telegram Bots (Practice)

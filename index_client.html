@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>Wut is Elixir?</title>
+<meta name="author" content="(@Cuwano)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="file:///home/ironjanowar/reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="file:///home/ironjanowar/reveal.js/css/theme/blood.css" id="theme"/>
+
+<link rel="stylesheet" href="./acm.css"/>
+<link rel="stylesheet" href="file:///home/ironjanowar/reveal.js/lib/css/zenburn.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:///home/ironjanowar/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<meta name="description" content="EmacsFTW.">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Wut is Elixir?</h1><h2 class="author">@Cuwano</h2>
+</section>
+
+<section>
+<section id="slide-sec-">
+<h2 id="orgcad2954">Basic Elixir</h2>
+<div class="outline-text-2" id="text-orgcad2954">
+</div>
+</section>
+<section id="slide-sec-">
+<h3 id="orgbdd9cd6">Pattern matching</h3>
+</section>
+<section id="slide-sec-">
+<h3 id="org0dc90bb">Module definition</h3>
+</section>
+<section id="slide-sec-">
+<h3 id="org40c2d5c">Functions</h3>
+<p>
+Anonymous functions
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-">
+<h2 id="org67dd68f">Processes</h2>
+<div class="outline-text-2" id="text-org67dd68f">
+</div>
+</section>
+<section id="slide-sec-">
+<h3 id="orge14f95f">Create processes</h3>
+<p>
+<code>spawn</code>
+</p>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orge645ff2">Send messages</h3>
+<p>
+<code>send</code>
+</p>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgebcf74f">Receive messages</h3>
+<p>
+<code>receive</code>
+</p>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgf18af16">Maintain a state</h3>
+<p>
+Create <code>loop</code> function
+</p>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org45c3588">Link a process</h3>
+<p>
+Handle errors
+"Let it crash"
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-">
+<h2 id="orgf411065">GenServer</h2>
+<div class="outline-text-2" id="text-orgf411065">
+</div>
+</section>
+<section id="slide-sec-">
+<h3 id="org8fef994">Create GenServers</h3>
+<p>
+Define GenServer module
+<code>start_link</code>
+</p>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgdecfe1b">Send messages</h3>
+<p>
+<code>call</code>, <code>cast</code>, <code>send</code>
+</p>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgfa41c1b">Receive messages</h3>
+<p>
+<code>handle_call</code>, <code>handle_cast</code>, <code>handle_info</code>
+</p>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org4a78431">Maintain a state</h3>
+</section>
+<section id="slide-sec-">
+<h3 id="orga8f1859">Link a GenServer</h3>
+<p>
+Handle errors
+</p>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org6626e0e">Agents</h3>
+<p>
+Another implementation of GenServer
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-">
+<h2 id="org422bb49">Telegram Bots (Practice)</h2>
+</section>
+</section>
+</div>
+</div>
+<script src="file:///home/ironjanowar/reveal.js/lib/js/head.min.js"></script>
+<script src="file:///home/ironjanowar/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'h/v',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+margin: 0.10,
+minScale: 0.50,
+maxScale: 2.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: null, // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'file:///home/ironjanowar/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/ironjanowar/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/ironjanowar/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'file:///home/ironjanowar/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: '', async: true },
+ { src: 'file:///home/ironjanowar/reveal.js/plugin/multiplex/client.js', async: true },
+ { src: 'file:///home/ironjanowar/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'file:///home/ironjanowar/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }]
+});
+</script>
+</body>
+</html>
