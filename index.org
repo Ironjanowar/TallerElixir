@@ -33,6 +33,25 @@
 ** Pattern matching
 #+BEGIN_SRC elixir
 {a, b} = {1, 2}
+
+{c, _, _} = {3, 3, 6}
+
+d = {1, 2, 3}
+#+END_SRC
+
+** Atoms
+#+BEGIN_SRC elixir
+:ok
+:hello
+:this_is_an_atom
+
+ThisIsAlsoAnAtom
+Hello
+#+END_SRC
+
+** Atoms
+#+BEGIN_SRC elixir
+  {:ok, result} = mega_function()
 #+END_SRC
 
 ** Module definition and functions
