@@ -319,7 +319,7 @@ Guards are very useful in functions
 #+END_SRC
 
 ** Link a process
-Handle crashes, the magic :trap_exit
+Handle crashes, the magic ~:trap_exit~
 #+BEGIN_SRC elixir
   self()
   # #PID<0.115.0>
