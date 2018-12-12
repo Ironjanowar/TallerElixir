@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
-<title>Wut is Elixir?</title>
+<title>Fun with Elixir</title>
 <meta name="author" content="(@Cuwano)"/>
 <style type="text/css">
 .underline { text-decoration: underline; }
@@ -28,80 +28,450 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">Wut is Elixir?</h1><h2 class="author">@Cuwano</h2>
+<section id="sec-title-slide"><h1 class="title">Fun with Elixir</h1><h2 class="author">@Cuwano</h2>
 </section>
 
 <section>
 <section id="slide-sec-">
-<h2 id="org390130e">Basic Elixir</h2>
-<div class="outline-text-2" id="text-org390130e">
+<h2 id="orgeb9a4c5">Dafuq is Elixir?</h2>
+
+<div class="figure">
+<p><img src="./images/dafuq_meme.jpg" alt="dafuq_meme.jpg" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-sec-">
+<h2 id="orgc8dbb11">Basic Elixir</h2>
+<div class="outline-text-2" id="text-orgc8dbb11">
 </div>
 </section>
 <section id="slide-sec-">
-<h3 id="org466c181">Pattern matching</h3>
+<h3 id="org69f2026">Pattern matching</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >x = 1
+# 1
+
+1 = x
+# 1
+
+1 = y
+# ** (CompileError) iex:3: undefined function y/0
+
+2 = x
+# ** (MatchError) no match of right hand side value: 1 ...
+</code></pre>
+</div>
+
 </section>
 <section id="slide-sec-">
-<h3 id="orgda3ee7c">Module definition</h3>
+<h3 id="orga186b50">Pattern matching</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >{a, b} = {1, 2}
+# {1, 2}
+
+a
+# 1
+
+{a, b} = {1, 2, 3}
+# ** (MatchError) no match of right hand side value: {1, 2, 3} ...
+
+{c, _, _} = {3, 3, 6}
+# {3, 3, 6}
+
+c
+# 3
+</code></pre>
+</div>
+
 </section>
 <section id="slide-sec-">
-<h3 id="org5758497">Functions</h3>
+<h3 id="orgf6e7586">Atoms</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >:ok
+:hello
+:this_is_an_atom
+
+ThisIsAlsoAnAtom
+Hello
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgcc4cdac">case clause</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >case {1, 2, 3} do
+  {4, 5, 6} -> "Does not match"
+  {1, x, 3} -> "Match and bind x to 2"
+  _ -> "This will match any other value"
+end
+# "Match and bind x to 2"
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org8dd1873">case clause</h3>
 <p>
-Anonymous functions
+Match the value of a variable
 </p>
+
+<div class="org-src-container">
+
+<pre><code class="elixir" >x = 2
+
+case 2 do
+  ^x -> "Will match"
+  _ -> "This will match any other value"
+end
+# "Will match"
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org0a2145f">case clause</h3>
+<p>
+Guards
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="elixir" >case {1, 2, 3} do
+  {1, x, 3} when x > 0 -> "Will match"
+  _ -> "This will match any other value"
+end
+# "Will match"
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org4234d1c">case clause</h3>
+<p>
+Atoms are useful here
+</p>
+<div class="org-src-container">
+
+<pre><code class="elixir" >case some_function() do
+  {:ok, result} -> # Do something with result
+  {:error, error_message} -> # Do something with error_message
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org8993583">Module definition and functions</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" ># le_test.ex
+defmodule LeTest do
+  def sum(a, b) do
+    a + b
+  end
+
+  def sum({a, b}) do
+    a + b
+  end
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org4e63726">Module definition and functions</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" ># le_test.ex
+defmodule LeTest do
+  # Arity 2
+  def sum(a, b), do: a + b
+
+  # Arity 1
+  def sum({a, b}), do: a + b
+  def sum(a), do: a + 1
+  def sum(_), do: 0
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgb299bf5">Module definition and functions</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >LeTest.sum(1, 2)
+# 3
+
+LeTest.sum(1)
+# 2
+
+LeTest.sum({2, 2})
+# 4
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgd6023c8">Module definition and functions</h3>
+<p>
+Guards are very useful in functions
+</p>
+<div class="org-src-container">
+
+<pre><code class="elixir" ># le_test.ex
+defmodule LeTest do
+  def sum(a, b) when is_integer(a) and is_integer(b), do: {:ok, a + b}
+  def sum(_, _), do: {:error, "I only accept integers"}
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgaedfe7d">Anonymous functions</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >sum = fn a, b -> a + b end
+# #Function<20.128620087/0 in :erl_eval.expr/5>
+
+sum.(1, 2)
+# 3
+
+sum = & &1 + &2
+
+sum.(2, 2)
+# 4
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org77df76b">Anonymous functions</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >Enum.map([1, 2, 3], fn x -> x + 1 end)
+# [2, 3, 4]
+
+Enum.map([1, 2, 3], & &1 + 1)
+# [2, 3, 4]
+</code></pre>
+</div>
 
 </section>
 </section>
 <section>
 <section id="slide-sec-">
-<h2 id="orga2e0fa5">Processes</h2>
-<div class="outline-text-2" id="text-orga2e0fa5">
+<h2 id="org19d0742">Processes</h2>
+<div class="outline-text-2" id="text-org19d0742">
 </div>
 </section>
 <section id="slide-sec-">
-<h3 id="orgc5cde1c">Create processes</h3>
-<p>
-<code>spawn</code>
-</p>
+<h3 id="org699189a">Create processes</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >spawn(fn -> nil end)
+# #PID<0.214.0>
+</code></pre>
+</div>
 
 </section>
 <section id="slide-sec-">
-<h3 id="org8d88921">Send messages</h3>
-<p>
-<code>send</code>
-</p>
+<h3 id="org5d0e69b">Create processes</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >spawn(fn -> Enum.sum(1..100) end)
+# #PID<0.220.0>
+</code></pre>
+</div>
 
 </section>
 <section id="slide-sec-">
-<h3 id="org7ad196c">Receive messages</h3>
-<p>
-<code>receive</code>
-</p>
+<h3 id="orgabea468">Send messages</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >father = self()
+spawn(fn ->
+  sum = Enum.sum(1..100)
+  send(father, sum)
+end)
+# #PID<0.231.0>
+
+flush
+# 5050
+# :ok
+</code></pre>
+</div>
 
 </section>
 <section id="slide-sec-">
-<h3 id="org6f3dc80">Maintain a state</h3>
-<p>
-Create <code>loop</code> function
-</p>
+<h3 id="org394f1ef">Receive messages</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >father = self()
+spawn(fn ->
+  sum = Enum.sum(1..100)
+  send(father, sum)
+end)
+
+receive do
+  num when is_integer(num) -> "Received the result #{num}"
+  _ -> "Wut?"
+end
+# "Received the result 5050"
+</code></pre>
+</div>
 
 </section>
 <section id="slide-sec-">
-<h3 id="org0d3c09a">Link a process</h3>
+<h3 id="org483cff7">Receive messages</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >pid =
+  spawn(fn ->
+    receive do
+      {pid, :ping} ->
+        send(pid, :pong)
+    end
+  end)
+# #PID<0.245.0>
+
+Process.alive?(pid)
+# true
+
+send(pid, {self(), :ping})
+# {#PID<0.180.0>, :ping}
+
+flush
+# :pong
+# :ok
+
+Process.alive?(pid)
+# false
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org5094c6b">Receive messages</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >defmodule PingPong do
+  def loop() do
+    receive do
+      {pid, :ping} ->
+        send(pid, :pong)
+        loop()
+
+      {pid, :pong} ->
+        send(pid, :ping)
+        loop()
+    end
+  end
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org72c6c35">Maintain a state</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >defmodule PingPong do
+  def loop(), do: loop({0, 0})
+  def loop({pings, pongs} = state) do
+    receive do
+      {pid, :ping} ->
+        send(pid, :pong)
+        loop({pings + 1, pongs})
+
+      {pid, :pong} ->
+        send(pid, :ping)
+        loop({pings, pongs + 1})
+      {pid, :state} ->
+        send(pid, state)
+        loop(state)
+    end
+  end
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgb53463a">Link a process</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >self()
+# #PID<0.101.0>
+
+pid = spawn(fn -> receive do :crash -> 1/0 end end)
+# #PID<0.140.0>
+
+Process.link(pid)
+# true
+
+send(pid, :crash)
+# 18:37:21.684 [error] Process #PID<0.140.0> raised an exception
+# ** (ArithmeticError) bad argument in arithmetic expression
+#     :erlang./(1, 0)
+
+self()
+# #PID<0.115.0>
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgefa0a2c">Link a process</h3>
 <p>
-Handle errors
-"Let it crash"
+Handle crashes, the magic :trap<sub>exit</sub>
 </p>
+<div class="org-src-container">
+
+<pre><code class="elixir" >self()
+# #PID<0.115.0>
+
+Process.flag(:trap_exit, true)
+# false
+
+pid = spawn(fn -> receive do :crash -> 1/0 end end)
+# #PID<0.140.0>
+
+Process.link(pid)
+# true
+
+send(pid, :crash)
+# 18:37:21.684 [error] Process #PID<0.140.0> raised an exception
+# ** (ArithmeticError) bad argument in arithmetic expression
+#     :erlang./(1, 0)
+
+self()
+# #PID<0.115.0>
+
+flush
+# {:EXIT, #PID<0.140.0>, {:badarith, [{:erlang, :/, [1, 0], []}]}}
+# :ok
+</code></pre>
+</div>
 
 </section>
 </section>
 <section>
 <section id="slide-sec-">
-<h2 id="org1141356">GenServer</h2>
-<div class="outline-text-2" id="text-org1141356">
+<h2 id="orgcf35ad0">GenServer</h2>
+<div class="outline-text-2" id="text-orgcf35ad0">
 </div>
 </section>
 <section id="slide-sec-">
-<h3 id="org20c5efb">Create GenServers</h3>
+<h3 id="org0576028">Create GenServers</h3>
 <p>
 Define GenServer module
 <code>start_link</code>
@@ -109,31 +479,31 @@ Define GenServer module
 
 </section>
 <section id="slide-sec-">
-<h3 id="orgc45254a">Send messages</h3>
+<h3 id="org495fdea">Send messages</h3>
 <p>
 <code>call</code>, <code>cast</code>, <code>send</code>
 </p>
 
 </section>
 <section id="slide-sec-">
-<h3 id="org7729e57">Receive messages</h3>
+<h3 id="org0457f4c">Receive messages</h3>
 <p>
 <code>handle_call</code>, <code>handle_cast</code>, <code>handle_info</code>
 </p>
 
 </section>
 <section id="slide-sec-">
-<h3 id="org12e6e31">Maintain a state</h3>
+<h3 id="orgbbd76bc">Maintain a state</h3>
 </section>
 <section id="slide-sec-">
-<h3 id="org0191e2e">Link a GenServer</h3>
+<h3 id="orgf83198c">Link a GenServer</h3>
 <p>
 Handle errors
 </p>
 
 </section>
 <section id="slide-sec-">
-<h3 id="org0653805">Agents</h3>
+<h3 id="org23bd297">Agents</h3>
 <p>
 Another implementation of GenServer
 </p>
@@ -142,7 +512,7 @@ Another implementation of GenServer
 </section>
 <section>
 <section id="slide-sec-">
-<h2 id="org1c842ed">Telegram Bots (Practice)</h2>
+<h2 id="org2577515">Telegram Bots (Practice)</h2>
 </section>
 </section>
 </div>

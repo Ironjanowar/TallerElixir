@@ -1,4 +1,4 @@
-#+Title: Wut is Elixir?
+#+Title: Fun with Elixir
 #+Author: @Cuwano
 #+Email:SexyACM@BestAsocEUW.io
 
@@ -29,14 +29,40 @@
 #+OPTIONS: toc:nil
 # #+OPTIONS: reveal_single_file:t
 
+* Dafuq is Elixir?
+[[./images/dafuq_meme.jpg]]
 * Basic Elixir
 ** Pattern matching
 #+BEGIN_SRC elixir
+x = 1
+# 1
+
+1 = x
+# 1
+
+1 = y
+# ** (CompileError) iex:3: undefined function y/0
+
+2 = x
+# ** (MatchError) no match of right hand side value: 1 ...
+#+END_SRC
+
+** Pattern matching
+#+BEGIN_SRC elixir
 {a, b} = {1, 2}
+# {1, 2}
+
+a
+# 1
+
+{a, b} = {1, 2, 3}
+# ** (MatchError) no match of right hand side value: {1, 2, 3} ...
 
 {c, _, _} = {3, 3, 6}
+# {3, 3, 6}
 
-d = {1, 2, 3}
+c
+# 3
 #+END_SRC
 
 ** Atoms
@@ -49,9 +75,47 @@ ThisIsAlsoAnAtom
 Hello
 #+END_SRC
 
-** Atoms
+** case clause
 #+BEGIN_SRC elixir
-  {:ok, result} = mega_function()
+  case {1, 2, 3} do
+    {4, 5, 6} -> "Does not match"
+    {1, x, 3} -> "Match and bind x to 2"
+    _ -> "This will match any other value"
+  end
+  # "Match and bind x to 2"
+#+END_SRC
+
+** case clause
+Match the value of a variable
+
+#+BEGIN_SRC elixir
+  x = 2
+
+  case 2 do
+    ^x -> "Will match"
+    _ -> "This will match any other value"
+  end
+  # "Will match"
+#+END_SRC
+
+** case clause
+Guards
+
+#+BEGIN_SRC elixir
+  case {1, 2, 3} do
+    {1, x, 3} when x > 0 -> "Will match"
+    _ -> "This will match any other value"
+  end
+  # "Will match"
+#+END_SRC
+
+** case clause
+Atoms are useful here
+#+BEGIN_SRC elixir
+  case some_function() do
+    {:ok, result} -> # Do something with result
+    {:error, error_message} -> # Do something with error_message
+  end
 #+END_SRC
 
 ** Module definition and functions
@@ -94,9 +158,20 @@ Hello
   # 4
 #+END_SRC
 
+** Module definition and functions
+Guards are very useful in functions
+#+BEGIN_SRC elixir
+  # le_test.ex
+  defmodule LeTest do
+    def sum(a, b) when is_integer(a) and is_integer(b), do: {:ok, a + b}
+    def sum(_, _), do: {:error, "I only accept integers"}
+  end
+#+END_SRC
+
 ** Anonymous functions
 #+BEGIN_SRC elixir
   sum = fn a, b -> a + b end
+  # #Function<20.128620087/0 in :erl_eval.expr/5>
 
   sum.(1, 2)
   # 3
@@ -107,22 +182,167 @@ Hello
   # 4
 #+END_SRC
 
+** Anonymous functions
+#+BEGIN_SRC elixir
+  Enum.map([1, 2, 3], fn x -> x + 1 end)
+  # [2, 3, 4]
+
+  Enum.map([1, 2, 3], & &1 + 1)
+  # [2, 3, 4]
+#+END_SRC
+
 * Processes
 ** Create processes
-~spawn~
+#+BEGIN_SRC elixir
+  spawn(fn -> nil end)
+  # #PID<0.214.0>
+#+END_SRC
+
+** Create processes
+#+BEGIN_SRC elixir
+  spawn(fn -> Enum.sum(1..100) end)
+  # #PID<0.220.0>
+#+END_SRC
 
 ** Send messages
-~send~
+#+BEGIN_SRC elixir
+  father = self()
+  spawn(fn ->
+    sum = Enum.sum(1..100)
+    send(father, sum)
+  end)
+  # #PID<0.231.0>
+
+  flush
+  # 5050
+  # :ok
+#+END_SRC
 
 ** Receive messages
-~receive~
+#+BEGIN_SRC elixir
+  father = self()
+  spawn(fn ->
+    sum = Enum.sum(1..100)
+    send(father, sum)
+  end)
+
+  receive do
+    num when is_integer(num) -> "Received the result #{num}"
+    _ -> "Wut?"
+  end
+  # "Received the result 5050"
+#+END_SRC
+
+** Receive messages
+#+BEGIN_SRC elixir
+  pid =
+    spawn(fn ->
+      receive do
+        {pid, :ping} ->
+          send(pid, :pong)
+      end
+    end)
+  # #PID<0.245.0>
+
+  Process.alive?(pid)
+  # true
+
+  send(pid, {self(), :ping})
+  # {#PID<0.180.0>, :ping}
+
+  flush
+  # :pong
+  # :ok
+
+  Process.alive?(pid)
+  # false
+#+END_SRC
+
+** Receive messages
+#+BEGIN_SRC elixir
+  defmodule PingPong do
+    def loop() do
+      receive do
+        {pid, :ping} ->
+          send(pid, :pong)
+          loop()
+
+        {pid, :pong} ->
+          send(pid, :ping)
+          loop()
+      end
+    end
+  end
+#+END_SRC
 
 ** Maintain a state
-Create ~loop~ function
+#+BEGIN_SRC elixir
+  defmodule PingPong do
+    def loop(), do: loop({0, 0})
+    def loop({pings, pongs} = state) do
+      receive do
+        {pid, :ping} ->
+          send(pid, :pong)
+          loop({pings + 1, pongs})
+
+        {pid, :pong} ->
+          send(pid, :ping)
+          loop({pings, pongs + 1})
+        {pid, :state} ->
+          send(pid, state)
+          loop(state)
+      end
+    end
+  end
+#+END_SRC
 
 ** Link a process
-Handle errors
-"Let it crash"
+#+BEGIN_SRC elixir
+  self()
+  # #PID<0.101.0>
+
+  pid = spawn(fn -> receive do :crash -> 1/0 end end)
+  # #PID<0.140.0>
+
+  Process.link(pid)
+  # true
+
+  send(pid, :crash)
+  # 18:37:21.684 [error] Process #PID<0.140.0> raised an exception
+  # ** (ArithmeticError) bad argument in arithmetic expression
+  #     :erlang./(1, 0)
+
+  self()
+  # #PID<0.115.0>
+#+END_SRC
+
+** Link a process
+Handle crashes, the magic :trap_exit
+#+BEGIN_SRC elixir
+  self()
+  # #PID<0.115.0>
+
+  Process.flag(:trap_exit, true)
+  # false
+
+  pid = spawn(fn -> receive do :crash -> 1/0 end end)
+  # #PID<0.140.0>
+
+  Process.link(pid)
+  # true
+
+  send(pid, :crash)
+  # 18:37:21.684 [error] Process #PID<0.140.0> raised an exception
+  # ** (ArithmeticError) bad argument in arithmetic expression
+  #     :erlang./(1, 0)
+
+  self()
+  # #PID<0.115.0>
+
+  flush
+  # {:EXIT, #PID<0.140.0>, {:badarith, [{:erlang, :/, [1, 0], []}]}}
+  # :ok
+#+END_SRC
 
 * GenServer
 ** Create GenServers
