@@ -31,6 +31,8 @@
 
 * Dafuq is Elixir?
 [[./images/dafuq_meme.jpg]]
+
+/Elixir is a dynamic, functional language designed for building scalable and maintainable applications./
 * Basic Elixir
 ** Pattern matching
 #+BEGIN_SRC elixir
