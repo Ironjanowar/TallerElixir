@@ -34,6 +34,8 @@
 
 /Elixir is a dynamic, functional language designed for building scalable and maintainable applications./
 * Basic Elixir
+https://elixir-lang.org/install.html
+
 ** Pattern matching
 #+BEGIN_SRC elixir
 x = 1
@@ -191,6 +193,22 @@ Guards are very useful in functions
 
   Enum.map([1, 2, 3], & &1 + 1)
   # [2, 3, 4]
+#+END_SRC
+
+** Pipe operator
+#+BEGIN_SRC elixir
+  [1, 2, 3] |> Enum.map(fn x -> x + 1 end)
+  # [2, 3, 4]
+
+  [1, 2, 3] |> Enum.map(fn x -> x + 1 end) |> Enum.sum()
+  # 9
+
+  [1, 2, 3]
+  |> Enum.map(fn x -> x + 1 end)
+  |> Enum.map(fn x -> x * 2 end)
+  |> Enum.sum()
+  |> Integer.to_string()
+  # "18"
 #+END_SRC
 
 * Processes
@@ -362,6 +380,6 @@ Define GenServer module
 Handle errors
 
 ** Agents
-Another implementation of GenServer
+An abstraction of GenServer
 
 * Telegram Bots (Practice)
