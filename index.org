@@ -36,6 +36,8 @@
 * Basic Elixir
 https://elixir-lang.org/install.html
 
+https://github.com/Ironjanowar/TallerElixir
+
 ** Pattern matching
 #+BEGIN_SRC elixir
 x = 1
