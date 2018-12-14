@@ -422,6 +422,27 @@ used to keep state, execute code asynchronously and so on./
   end
 #+END_SRC
 
+** GenServer answers
+#+BEGIN_SRC elixir
+  def handle_call(message, from, state) do
+    # Replies
+    {:reply, answer, new_state}
+    {:noreply, new_state}
+
+    {:stop, reason, reply, new_state}
+    {:stop, reason, reply}
+  end
+#+END_SRC
+
+** GenServer answers
+#+BEGIN_SRC elixir
+  def handle_cast(message, state) do
+    # Replies
+    {:noreply, new_state}
+    {:stop, reason}
+  end
+#+END_SRC
+
 ** Create a client for a GenServer
 #+BEGIN_SRC elixir
   defmodule Stack do
