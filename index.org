@@ -365,21 +365,163 @@ Handle crashes, the magic ~:trap_exit~
 #+END_SRC
 
 * GenServer
+/A GenServer is a process like any other Elixir process and it can be
+used to keep state, execute code asynchronously and so on./
+
+** GenServer
+#+BEGIN_SRC elixir
+  defmodule Stack do
+    use GenServer
+
+    # Callbacks
+    def init(stack) do
+      {:ok, stack}
+    end
+
+    def handle_call(:pop, _from, [head | tail]) do
+      {:reply, head, tail}
+    end
+
+    def handle_cast({:push, item}, state) do
+      {:noreply, [item | state]}
+    end
+  end
+#+END_SRC
+
 ** Create GenServers
-Define GenServer module
-~start_link~
+#+BEGIN_SRC elixir
+  {:ok, pid} = GenServer.start_link(Stack, [:hello])
+  # {:ok, #PID<0.129.0>}
+#+END_SRC
+
+*state:* ~[:hello]~
 
 ** Send messages
-~call~, ~cast~, ~send~
+#+BEGIN_SRC elixir
+  GenServer.cast(pid, {:push, :world})
+  # :ok
+#+END_SRC
 
 ** Receive messages
-~handle_call~, ~handle_cast~, ~handle_info~
+#+BEGIN_SRC elixir
+  def handle_cast({:push, item}, state) do
+    {:noreply, [item | state]}
+  end
+#+END_SRC
 
-** Maintain a state
-** Link a GenServer
-Handle errors
+** Send messages
+#+BEGIN_SRC elixir
+  GenServer.call(pid, :pop)
+  # :world
+#+END_SRC
+
+** Receive messages
+#+BEGIN_SRC elixir
+  def handle_call(:pop, _from, [head | tail]) do
+    {:reply, head, tail}
+  end
+#+END_SRC
+
+** Create a client for a GenServer
+#+BEGIN_SRC elixir
+  defmodule Stack do
+    use GenServer
+
+    # Client
+    def start(initial_state) do
+      GenServer.start_link(Stack, initial_state)
+    end
+
+    def push(pid, item) do
+      GenServer.cast(pid, {:push, item})
+    end
+
+    def pop(pid) do
+      GenServer.call(pid, :pop)
+    end
+
+    # Callbacks ...
+  end
+#+END_SRC
+
+** Name a GenServer
+#+BEGIN_SRC elixir
+  defmodule Stack do
+    use GenServer
+
+    # Client
+    def start(initial_state \\ []) do
+      GenServer.start_link(Stack, initial_state, name: Stack)
+    end
+
+    def push(item) do
+      GenServer.cast(Stack, {:push, item})
+    end
+
+    def pop() do
+      GenServer.call(Stack, :pop)
+    end
+
+    # Callbacks ...
+  end
+#+END_SRC
 
 ** Agents
-An abstraction of GenServer
+/The Agent module provides a basic server implementation that allows
+state to be retrieved and updated via a simple API./
+
+** Agents
+#+BEGIN_SRC elixir
+  defmodule Basket do
+    use Agent
+
+    def start() do
+      Agent.start_link(&MapSet.new/0, name: __MODULE__)
+    end
+
+    def member?(product) do
+      Agent.get(__MODULE__, fn state -> MapSet.member?(state, product) end)
+    end
+
+    def get() do
+      Agent.get(__MODULE__, fn state -> state end)
+    end
+
+    def put(product) do
+      Agent.update(__MODULE__, fn state -> MapSet.put(state, product) end)
+    end
+
+    def delete(product) do
+      Agent.update(__MODULE__, fn state -> MapSet.delete(state, product) end)
+    end
+  end
+#+END_SRC
+
+** Agents
+#+BEGIN_SRC elixir
+  defmodule Basket do
+    use Agent
+
+    def start() do
+      Agent.start_link(&MapSet.new/0, name: __MODULE__)
+    end
+
+    def member?(product) do
+      Agent.get(__MODULE__, &MapSet.member?(&1, product))
+    end
+
+    def get() do
+      Agent.get(__MODULE__, &(&1 |> MapSet.to_list()))
+    end
+
+    def put(product) do
+      Agent.update(__MODULE__, &MapSet.put(&1, product))
+    end
+
+    def delete(product) do
+      Agent.update(__MODULE__, &(MapSet.delete(&1, product) |> MapSet.to_list()))
+    end
+  end
+#+END_SRC
 
 * Telegram Bots (Practice)
