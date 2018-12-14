@@ -546,3 +546,133 @@ state to be retrieved and updated via a simple API./
 #+END_SRC
 
 * Telegram Bots (Practice)
+** Creating an Elixir project
+#+BEGIN_SRC shell
+$ mix new awesome_bot
+ * creating README.md
+ * creating .formatter.exs
+ * creating .gitignore
+ * creating mix.exs
+ * creating config
+ * creating config/config.exs
+ * creating lib
+ * creating lib/awesome_bot.ex
+ * creating test
+ * creating test/test_helper.exs
+ * creating test/awesome_bot_test.exs
+
+Your Mix project was created successfully.
+You can use "mix" to compile it, test it, and more:
+
+    cd awesome_bot
+    mix test
+
+Run "mix help" for more commands.
+#+END_SRC
+
+** Adding dependencies
+https://github.com/rockneurotiko/ex_gram
+
+#+BEGIN_SRC elixir
+  # awesome_bot/mix.exs
+
+  # Run "mix help deps" to learn about dependencies.
+  defp deps do
+    [
+      {:ex_gram, "0.5.0-rc3"}
+    ]
+  end
+#+END_SRC
+
+** Adding dependencies
+https://github.com/rockneurotiko/ex_gram
+
+#+BEGIN_SRC elixir
+  # awesome_bot/mix.exs
+
+  # Run "mix help deps" to learn about dependencies.
+  defp deps do
+    [
+      {:ex_gram, git: "git://github.com/rockneurotiko/ex_gram.git"}
+    ]
+  end
+#+END_SRC
+
+** Application
+#+BEGIN_SRC elixir
+  defmodule AwesomeBot do
+    use Application
+
+    import Supervisor.Spec
+
+    require Logger
+
+    def start(_type, _args) do
+      token = ExGram.Config.get(:ex_gram, :token)
+
+      children = [
+        supervisor(ExGram, []),
+        supervisor(Awesome.Bot, [:polling, token])
+      ]
+
+      opts = [strategy: :one_for_one, name: AwesomeBot]
+
+      case Supervisor.start_link(children, opts) do
+        {:ok, _} = ok ->
+          Logger.info("Starting AwesomeBot")
+          ok
+
+        error ->
+          Logger.error("Error starting AwesomeBot")
+          error
+      end
+    end
+  end
+#+END_SRC
+
+** Starting module
+#+BEGIN_SRC elixir
+  # Run "mix help compile.app" to learn about applications.
+  def application do
+    [
+      extra_applications: [:logger],
+      mod: {AwesomeBot, []}
+    ]
+  end
+#+END_SRC
+
+** Config, add your token
+#+BEGIN_SRC elixir
+  # This file is responsible for configuring your application
+  # and its dependencies with the aid of the Mix.Config module.
+  use Mix.Config
+
+  config :ex_gram,
+    token: "token"
+
+#+END_SRC
+
+** Create your message handlers
+#+BEGIN_SRC elixir
+  defmodule AwesomeBot.Bot do
+    @bot :awesome_bot
+
+    use ExGram.Bot,
+      name: @bot
+
+    def bot(), do: @bot
+
+    def handle({:command, "start", _msg}, context) do
+      msg = "Well hello! This is an awesome bot!"
+      answer(context, msg)
+    end
+  end
+#+END_SRC
+
+** Compile and run your project
+#+BEGIN_SRC shell
+$ mix run --no-halt
+Compiling 1 file (.ex)
+
+23:57:44.219 [info]  Starting AwesomeBot
+#+END_SRC

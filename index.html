@@ -33,7 +33,7 @@
 
 <section>
 <section id="slide-sec-">
-<h2 id="org23c864d">Dafuq is Elixir?</h2>
+<h2 id="org4247d0c">Dafuq is Elixir?</h2>
 
 <div class="figure">
 <p><img src="./images/dafuq_meme.jpg" alt="dafuq_meme.jpg" />
@@ -47,14 +47,14 @@
 </section>
 <section>
 <section id="slide-sec-">
-<h2 id="orge9669cf">Basic Elixir</h2>
+<h2 id="org6505424">Basic Elixir</h2>
 <p>
 <a href="https://elixir-lang.org/install.html">https://elixir-lang.org/install.html</a>
 </p>
 
 </section>
 <section id="slide-sec-">
-<h3 id="orgea394ab">Pattern matching</h3>
+<h3 id="orgd96cbac">Pattern matching</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >x = 1
@@ -73,7 +73,7 @@
 
 </section>
 <section id="slide-sec-">
-<h3 id="org4be32ac">Pattern matching</h3>
+<h3 id="orgfe5e61a">Pattern matching</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >{a, b} = {1, 2}
@@ -95,7 +95,7 @@ c
 
 </section>
 <section id="slide-sec-">
-<h3 id="org3e9bc62">Atoms</h3>
+<h3 id="org19e1d41">Atoms</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >:ok
@@ -109,7 +109,7 @@ Hello
 
 </section>
 <section id="slide-sec-">
-<h3 id="org6345966">case clause</h3>
+<h3 id="org94f5e58">case clause</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >case {1, 2, 3} do
@@ -123,7 +123,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org6c3a6d9">case clause</h3>
+<h3 id="orgf6e358a">case clause</h3>
 <p>
 Match the value of a variable
 </p>
@@ -142,7 +142,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org6482731">case clause</h3>
+<h3 id="orga03bc07">case clause</h3>
 <p>
 Guards
 </p>
@@ -159,7 +159,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org1421f1d">case clause</h3>
+<h3 id="org751b795">case clause</h3>
 <p>
 Atoms are useful here
 </p>
@@ -174,7 +174,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="orgc93722e">Module definition and functions</h3>
+<h3 id="org0b72185">Module definition and functions</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" ># le_test.ex
@@ -192,7 +192,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org68d49e8">Module definition and functions</h3>
+<h3 id="orga48bf71">Module definition and functions</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" ># le_test.ex
@@ -210,7 +210,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org1b0a8cd">Module definition and functions</h3>
+<h3 id="org2b6b155">Module definition and functions</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >LeTest.sum(1, 2)
@@ -226,7 +226,7 @@ LeTest.sum({2, 2})
 
 </section>
 <section id="slide-sec-">
-<h3 id="org0a2dc92">Module definition and functions</h3>
+<h3 id="org568e0c4">Module definition and functions</h3>
 <p>
 Guards are very useful in functions
 </p>
@@ -242,7 +242,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="orgda45269">Anonymous functions</h3>
+<h3 id="org6caef96">Anonymous functions</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >sum = fn a, b -> a + b end
@@ -260,7 +260,7 @@ sum.(2, 2)
 
 </section>
 <section id="slide-sec-">
-<h3 id="org67f67ba">Anonymous functions</h3>
+<h3 id="orgb9688d4">Anonymous functions</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >Enum.map([1, 2, 3], fn x -> x + 1 end)
@@ -273,7 +273,7 @@ Enum.map([1, 2, 3], & &1 + 1)
 
 </section>
 <section id="slide-sec-">
-<h3 id="orge7b4e26">Pipe operator</h3>
+<h3 id="org860b090">Pipe operator</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >[1, 2, 3] |> Enum.map(fn x -> x + 1 end)
@@ -295,12 +295,12 @@ Enum.map([1, 2, 3], & &1 + 1)
 </section>
 <section>
 <section id="slide-sec-">
-<h2 id="org2f55917">Processes</h2>
-<div class="outline-text-2" id="text-org2f55917">
+<h2 id="org224f740">Processes</h2>
+<div class="outline-text-2" id="text-org224f740">
 </div>
 </section>
 <section id="slide-sec-">
-<h3 id="org23cc60a">Create processes</h3>
+<h3 id="orga3e4392">Create processes</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >spawn(fn -> nil end)
@@ -310,7 +310,7 @@ Enum.map([1, 2, 3], & &1 + 1)
 
 </section>
 <section id="slide-sec-">
-<h3 id="org6bd3422">Create processes</h3>
+<h3 id="org6cb1be9">Create processes</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >spawn(fn -> Enum.sum(1..100) end)
@@ -320,7 +320,7 @@ Enum.map([1, 2, 3], & &1 + 1)
 
 </section>
 <section id="slide-sec-">
-<h3 id="org1263517">Send messages</h3>
+<h3 id="orgb4bd48b">Send messages</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >father = self()
@@ -338,7 +338,7 @@ flush
 
 </section>
 <section id="slide-sec-">
-<h3 id="org49a72da">Receive messages</h3>
+<h3 id="org1b0cb75">Receive messages</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >father = self()
@@ -357,7 +357,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org147c1bb">Receive messages</h3>
+<h3 id="orge910717">Receive messages</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >pid =
@@ -386,7 +386,7 @@ Process.alive?(pid)
 
 </section>
 <section id="slide-sec-">
-<h3 id="org70779c8">Receive messages</h3>
+<h3 id="org6ff023d">Receive messages</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >defmodule PingPong do
@@ -407,7 +407,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org54e336c">Maintain a state</h3>
+<h3 id="orga406fef">Maintain a state</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >defmodule PingPong do
@@ -432,7 +432,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org1afdec1">Link a process</h3>
+<h3 id="org9f45f95">Link a process</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >self()
@@ -456,7 +456,7 @@ self()
 
 </section>
 <section id="slide-sec-">
-<h3 id="orgbc07136">Link a process</h3>
+<h3 id="org5ec028f">Link a process</h3>
 <p>
 Handle crashes, the magic <code>:trap_exit</code>
 </p>
@@ -492,7 +492,7 @@ flush
 </section>
 <section>
 <section id="slide-sec-">
-<h2 id="orgf53dfa7">GenServer</h2>
+<h2 id="org232bdb6">GenServer</h2>
 <p>
 <i>A GenServer is a process like any other Elixir process and it can be
 used to keep state, execute code asynchronously and so on.</i>
@@ -500,7 +500,7 @@ used to keep state, execute code asynchronously and so on.</i>
 
 </section>
 <section id="slide-sec-">
-<h3 id="orgeafbab5">GenServer</h3>
+<h3 id="org855f0a7">GenServer</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >defmodule Stack do
@@ -524,7 +524,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="orge4e9fac">Create GenServers</h3>
+<h3 id="org674f2c0">Create GenServers</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >{:ok, pid} = GenServer.start_link(Stack, [:hello])
@@ -538,7 +538,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org2734bde">Send messages</h3>
+<h3 id="org4c92a32">Send messages</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >GenServer.cast(pid, {:push, :world})
@@ -548,7 +548,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org091f51c">Receive messages</h3>
+<h3 id="orgae8cbf0">Receive messages</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >def handle_cast({:push, item}, state) do
@@ -559,7 +559,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="orgeaa2f7c">Send messages</h3>
+<h3 id="orgcf12a96">Send messages</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >GenServer.call(pid, :pop)
@@ -569,7 +569,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org8308d97">Receive messages</h3>
+<h3 id="org9f16083">Receive messages</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >def handle_call(:pop, _from, [head | tail]) do
@@ -580,7 +580,36 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org19cbbab">Create a client for a GenServer</h3>
+<h3 id="org77c6be0">GenServer answers</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >def handle_call(message, from, state) do
+  # Replies
+  {:reply, answer, new_state}
+  {:noreply, new_state}
+
+  {:stop, reason, reply, new_state}
+  {:stop, reason, reply}
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgb89fd61">GenServer answers</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >def handle_cast(message, state) do
+  # Replies
+  {:noreply, new_state}
+  {:stop, reason}
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org626fd8c">Create a client for a GenServer</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >defmodule Stack do
@@ -606,7 +635,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org7557940">Name a GenServer</h3>
+<h3 id="org330c40e">Name a GenServer</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >defmodule Stack do
@@ -632,7 +661,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org7cafaa8">Agents</h3>
+<h3 id="orgf0f2d8c">Agents</h3>
 <p>
 <i>The Agent module provides a basic server implementation that allows
 state to be retrieved and updated via a simple API.</i>
@@ -640,7 +669,7 @@ state to be retrieved and updated via a simple API.</i>
 
 </section>
 <section id="slide-sec-">
-<h3 id="orgeb66c48">Agents</h3>
+<h3 id="org210fb66">Agents</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >defmodule Basket do
@@ -671,7 +700,7 @@ end
 
 </section>
 <section id="slide-sec-">
-<h3 id="org2f8c562">Agents</h3>
+<h3 id="org76a6efd">Agents</h3>
 <div class="org-src-container">
 
 <pre><code class="elixir" >defmodule Basket do
@@ -704,7 +733,175 @@ end
 </section>
 <section>
 <section id="slide-sec-">
-<h2 id="orga7e0340">Telegram Bots (Practice)</h2>
+<h2 id="orge3a9a87">Telegram Bots (Practice)</h2>
+<div class="outline-text-2" id="text-orge3a9a87">
+</div>
+</section>
+<section id="slide-sec-">
+<h3 id="orgfeff08e">Creating an Elixir project</h3>
+<div class="org-src-container">
+
+<pre><code class="shell" >$ mix new awesome_bot
+ * creating README.md
+ * creating .formatter.exs
+ * creating .gitignore
+ * creating mix.exs
+ * creating config
+ * creating config/config.exs
+ * creating lib
+ * creating lib/awesome_bot.ex
+ * creating test
+ * creating test/test_helper.exs
+ * creating test/awesome_bot_test.exs
+
+Your Mix project was created successfully.
+You can use "mix" to compile it, test it, and more:
+
+    cd awesome_bot
+    mix test
+
+Run "mix help" for more commands.
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org2997c50">Adding dependencies</h3>
+<p>
+<a href="https://github.com/rockneurotiko/ex_gram">https://github.com/rockneurotiko/ex_gram</a>
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="elixir" ># awesome_bot/mix.exs
+
+# Run "mix help deps" to learn about dependencies.
+defp deps do
+  [
+    {:ex_gram, "0.5.0-rc3"}
+  ]
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgd5a6da0">Adding dependencies</h3>
+<p>
+<a href="https://github.com/rockneurotiko/ex_gram">https://github.com/rockneurotiko/ex_gram</a>
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="elixir" ># awesome_bot/mix.exs
+
+# Run "mix help deps" to learn about dependencies.
+defp deps do
+  [
+    {:ex_gram, git: "git://github.com/rockneurotiko/ex_gram.git"}
+  ]
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org0e496a3">Application</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >defmodule AwesomeBot do
+  use Application
+
+  import Supervisor.Spec
+
+  require Logger
+
+  def start(_type, _args) do
+    token = ExGram.Config.get(:ex_gram, :token)
+
+    children = [
+      supervisor(ExGram, []),
+      supervisor(Awesome.Bot, [:polling, token])
+    ]
+
+    opts = [strategy: :one_for_one, name: AwesomeBot]
+
+    case Supervisor.start_link(children, opts) do
+      {:ok, _} = ok ->
+        Logger.info("Starting AwesomeBot")
+        ok
+
+      error ->
+        Logger.error("Error starting AwesomeBot")
+        error
+    end
+  end
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org2db1523">Starting module</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" ># Run "mix help compile.app" to learn about applications.
+def application do
+  [
+    extra_applications: [:logger],
+    mod: {AwesomeBot, []}
+  ]
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgb20be44">Config, add your token</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" ># This file is responsible for configuring your application
+# and its dependencies with the aid of the Mix.Config module.
+use Mix.Config
+
+config :ex_gram,
+  token: "token"
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="org686956a">Create your message handlers</h3>
+<div class="org-src-container">
+
+<pre><code class="elixir" >defmodule AwesomeBot.Bot do
+  @bot :awesome_bot
+
+  use ExGram.Bot,
+    name: @bot
+
+  def bot(), do: @bot
+
+  def handle({:command, "start", _msg}, context) do
+    msg = "Well hello! This is an awesome bot!"
+    answer(context, msg)
+  end
+end
+</code></pre>
+</div>
+
+</section>
+<section id="slide-sec-">
+<h3 id="orgd7fef8c">Compile and run your project</h3>
+<div class="org-src-container">
+
+<pre><code class="shell" >$ mix run --no-halt
+Compiling 1 file (.ex)
+
+23:57:44.219 [info]  Starting AwesomeBot
+</code></pre>
+</div>
 </section>
 </section>
 </div>
