@@ -366,6 +366,18 @@ Handle crashes, the magic ~:trap_exit~
   # :ok
 #+END_SRC
 
+** Monitor a process
+#+BEGIN_SRC elixir
+  {pid, _} = spawn_monitor(fn -> receive do :crash -> 1/0 end end)
+  # {#PID<0.109.0>, #Reference<0.1454498977.3767533571.36942>}
+
+  send(pid, :crash)
+  # 01:04:55.908 [error] Process #PID<0.112.0> raised an exception
+  # ** (ArithmeticError) bad argument in arithmetic expression
+  #     :erlang./(1, 0)
+
+#+END_SRC
+
 * GenServer
 /A GenServer is a process like any other Elixir process and it can be
 used to keep state, execute code asynchronously and so on./
